@@ -42,12 +42,15 @@ fun Vehiculo.toEntity(): VehiculoEntity {
 
 fun VehiculoDTO.toModel(): Vehiculo {
     logger.debug { "MAPPER: Mapeando DTO a modelo" }
+
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
     return Vehiculo(
         matricula = this.matricula,
         marca = this.marca,
         modelo = this.modelo,
         motor = Vehiculo.Motor.valueOf(this.motor),
-        fechaMatriculacion = LocalDate.parse(this.fechaMatriculacion),
+        fechaMatriculacion = LocalDate.parse(this.fechaMatriculacion, formatter),
     )
 }
 

@@ -8,14 +8,30 @@ import java.time.LocalDate
 fun main() {
     val service = Dependencies.getVehiculosService()
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Obtenemos todos los que hay por defecto (a partir de data.sql)
     service.getAll().forEach { println(it) }
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Búsqueda paginada
     println(service.findAllPaginated(5,0))
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Buscamos por id (existe)
     println(service.getdById(1))
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Buscamos por id (no existe)
     try {
@@ -24,8 +40,16 @@ fun main() {
         println(e.message)
     }
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Buscamos por matrícula (existe)
     println(service.findByMatricula("7890XYZ"))
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Buscamos por matrícula (no existe)
     try {
@@ -33,6 +57,10 @@ fun main() {
     } catch (e: Exception) {
         println(e.message)
     }
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Guardamos un vehículo (datos correctos)
     val vehiculo = Vehiculo(
@@ -43,6 +71,10 @@ fun main() {
         fechaMatriculacion = LocalDate.of(2014,10,31),
     )
     println(service.save(vehiculo))
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Guardamos un vehículo (datos incorrectos)
     val vehiculo2 = Vehiculo(
@@ -58,10 +90,18 @@ fun main() {
         println(e.message)
     }
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Eliminamos un vehículo (existe)
     println(service.delete(4))
     println("Vehículos en la Base de datos tras la eliminación:")
     service.getAll().forEach { println(it) }
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Eliminamos un vehículo (no existe)
     try {
@@ -70,8 +110,16 @@ fun main() {
         println(e.message)
     }
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Actualizamos un vehículo (existe)
     println(service.update(11, vehiculo))
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Actualizamos un vehículo (no existe)
     try {
@@ -80,15 +128,29 @@ fun main() {
         println(e.message)
     }
 
+    println()
+    println("----------------------------------")
+    println()
+
     //Leemos el fichero csv para importar vehículos
     val file: File = File(Config.storageData, "concesionario.csv")
 
     try {
-        service.readFromFile(file).forEach { service.save(it) }
+        service.readFromFile(file).forEach {
+            try {
+                service.save(it)
+            } catch (e: Exception) {
+                println("${vehiculo.matricula} ${e.message}")
+            }
+        }
     } catch (e: Exception) {
         println(e.message)
     }
     service.getAll().forEach { println(it) }
+
+    println()
+    println("----------------------------------")
+    println()
 
     //Escribimos en un fichero
     val file2: File = File(Config.storageOutput, "concesionarioBackup.csv")
