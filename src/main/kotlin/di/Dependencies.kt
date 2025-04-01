@@ -25,12 +25,12 @@ object Dependencies {
         logger.debug { "Inicializando gestor de dependencias" }
     }
 
-    private fun provideDatabaseManager(): Jdbi {
+    fun provideDatabaseManager(): Jdbi {
         logger.debug { "INYECCIÓN DEPENDENCIAS: Proporcionando JDBI" }
         return JdbiManager.instance
     }
 
-    private fun provideVehiculosDao(jdbi: Jdbi): VehiculosDAO {
+    fun provideVehiculosDao(jdbi: Jdbi): VehiculosDAO {
         logger.debug { "INYECCIÓN DEPENDENCIAS: Proporcionando DAO de Vehiculos" }
         return jdbi.onDemand(VehiculosDAO::class.java)
     }
