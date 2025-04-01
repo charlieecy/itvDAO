@@ -6,7 +6,6 @@ import org.example.mapper.toModel
 import org.example.models.Vehiculo
 import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 class VehiculoRepositoryImpl(

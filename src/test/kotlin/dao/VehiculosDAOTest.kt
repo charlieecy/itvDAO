@@ -13,6 +13,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
+@DisplayName("DAO")
 class VehiculosDAOTest {
     private lateinit var dao: VehiculosDAO
 

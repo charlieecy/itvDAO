@@ -11,6 +11,7 @@ import org.junit.jupiter.api.io.TempDir
 import java.io.File
 import java.time.LocalDate
 
+@DisplayName("Storage")
 class VehiculoStorageImplTest {
     private val storage = VehiculoStorageImpl()
     @Nested

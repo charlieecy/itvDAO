@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
+@DisplayName("Validador")
 class VehiculoValidatorTest{
 
     private var validator = VehiculoValidator()
