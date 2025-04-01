@@ -13,8 +13,6 @@ class VehiculoValidator: Validator<Vehiculo> {
 
         val regEx = """^\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$""".toRegex()
 
-        if (vehiculo.matricula.isBlank()) throw Exceptions.ValidationException("La matrícula no puede estar vacía")
-
         if (!vehiculo.matricula.matches(regEx)) throw Exceptions.ValidationException("La matrícula no tiene un formato correcto (NNNNLLL)")
 
         if (vehiculo.marca.isBlank()) throw Exceptions.ValidationException("La marca no puede estar vacía")
